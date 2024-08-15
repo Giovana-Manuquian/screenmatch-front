@@ -7,7 +7,9 @@ const elementos = {
     series: document.querySelector('[data-name="series"]')
 };
 
-// Função para criar a lista de filmes
+// Variáveis para controle do carrossel
+let currentIndex = 0;
+const itemsPerPage = 4; // Número de imagens a serem exibidas por vez (4)
 
 // Função para criar a lista de filmes
 function criarListaFilmes(elemento, dados) {
@@ -19,8 +21,14 @@ function criarListaFilmes(elemento, dados) {
         elemento.removeChild(ulExistente);
     }
 
+    const carrossel = document.createElement('div');
+    carrossel.className = 'carrossel';
+
+    // Cria a lista de filmes
     const ul = document.createElement('ul');
     ul.className = 'lista';
+
+    // Prepara a lista de filmes
     const listaHTML = dados.map((filme) => `
         <li>
             <a href="/detalhes.html?id=${filme.id}">
@@ -30,7 +38,63 @@ function criarListaFilmes(elemento, dados) {
     `).join('');
 
     ul.innerHTML = listaHTML;
-    elemento.appendChild(ul);
+    carrossel.appendChild(ul);
+
+    // Botões de navegação
+    const btnPrev = document.createElement('button');
+    btnPrev.id = 'prev';
+    btnPrev.ariaLabel = 'Anterior';
+    btnPrev.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>'; // Setas como ícones
+    carrossel.appendChild(btnPrev);
+
+    const btnNext = document.createElement('button');
+    btnNext.id = 'next';
+    btnNext.ariaLabel = 'Próximo';
+    btnNext.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>'; // Setas como ícones
+    carrossel.appendChild(btnNext);
+
+    elemento.appendChild(carrossel);
+
+    // Adiciona eventos para os botões
+    btnPrev.addEventListener('click', () => {
+        currentIndex = Math.max(0, currentIndex - 1); // Decrementa o índice, mas não permite que fique negativo
+        atualizarCarrossel(ul, dados);
+    });
+
+    btnNext.addEventListener('click', () => {
+        // Incrementa o índice
+        currentIndex++;
+        
+        // Se o índice ultrapassar o número de itens disponíveis, redefine para 0
+        if (currentIndex >= dados.length - itemsPerPage + 1) {
+            currentIndex = 0; // Volta para a primeira imagem
+        }
+
+        // Atualiza o carrossel
+        atualizarCarrossel(ul, dados);
+    });
+
+    atualizarCarrossel(ul, dados); // Atualiza a visualização inicial
+}
+
+// Função para atualizar a visualização do carrossel
+function atualizarCarrossel(ul, dados) {
+    const startIndex = currentIndex;
+    const endIndex = startIndex + itemsPerPage;
+
+    // Limpa a lista atual
+    ul.innerHTML = '';
+
+    // Adiciona os novos itens
+    const listaHTML = dados.slice(startIndex, endIndex).map((filme) => `
+        <li>
+            <a href="/detalhes.html?id=${filme.id}">
+                <img src="${filme.poster}" alt="${filme.titulo}">
+            </a>
+        </li>
+    `).join('');
+
+    ul.innerHTML = listaHTML;
 }
 
 // Função genérica para tratamento de erros
@@ -39,27 +103,23 @@ function lidarComErro(mensagemErro) {
 }
 
 const categoriaSelect = document.querySelector('[data-categorias]');
-const sectionsParaOcultar = document.querySelectorAll('.section'); // Adicione a classe CSS 'hide-when-filtered' às seções e títulos que deseja ocultar.
+const sectionsParaOcultar = document.querySelectorAll('.section');
 
 categoriaSelect.addEventListener('change', function () {
     const categoria = document.querySelector('[data-name="categoria"]');
     const categoriaSelecionada = categoriaSelect.value;
 
     if (categoriaSelecionada === 'todos') {
-
         for (const section of sectionsParaOcultar) {
-            section.classList.remove('hidden')
+            section.classList.remove('hidden');
         }
         categoria.classList.add('hidden');
-
     } else {
-
         for (const section of sectionsParaOcultar) {
-            section.classList.add('hidden')
+            section.classList.add('hidden');
         }
 
-        categoria.classList.remove('hidden')
-        // Faça uma solicitação para o endpoint com a categoria selecionada
+        categoria.classList.remove('hidden');
         getDados(`/series/categoria/${categoriaSelecionada}`)
             .then(data => {
                 criarListaFilmes(categoria, data);
@@ -75,7 +135,6 @@ geraSeries();
 function geraSeries() {
     const urls = ['/series/top5', '/series/lancamentos', '/series'];
 
-    // Faz todas as solicitações em paralelo
     Promise.all(urls.map(url => getDados(url)))
         .then(data => {
             criarListaFilmes(elementos.top5, data[0]);
@@ -85,5 +144,4 @@ function geraSeries() {
         .catch(error => {
             lidarComErro("Ocorreu um erro ao carregar os dados.");
         });
-
 }

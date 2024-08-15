@@ -5,8 +5,6 @@ body {
             #409ecd 100%);
     background-repeat: no-repeat;
     background-size: cover;
-
-
 }
 
 h1 {
@@ -30,13 +28,12 @@ select {
     outline: none;
 }
 
-
 h2 {
     color: white;
 }
 
 main {
-    padding: 0 3em;
+    padding: 0 8em;
 }
 
 .cabecalho {
@@ -57,33 +54,86 @@ main {
 
 .material-symbols-outlined {
     color: white;
-    font-size: 48px
+    font-size: 48px;
+}
+
+.carrossel {
+    position: relative;
+    overflow: hidden; /* Garante que as imagens que saem da tela não sejam visíveis */
 }
 
 .lista {
     list-style-type: none;
-    margin: 1em 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    justify-content: center; /* Alinha as imagens à esquerda */
+    margin: 0; /* Remove a margem */
+    padding: 0; /* Remove o preenchimento */
+    transition: transform 0.3s ease; /* Adiciona transição ao carrossel */
+    gap: 35px;
+}
 
-    gap: 1em;
+.lista li {
+    flex: 0 0 auto; /* Impede que a lista se expanda além do tamanho do conteúdo */
+    margin-right: 3px; /* Ajuste o espaço entre as imagens */
+}
+
+.lista li:last-child {
+    margin-right: 0; /* Remove a margem da última imagem */
 }
 
 .lista li img {
-    width: 300px;
-    height: 444px;
+    width: 290px; /* Você pode ajustar a largura aqui */
+    height: 400px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lista li img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button {
+    background-color: transparent; /* Muda para fundo transparente */
+    color: white;
+    border: none;
+    padding: 0; /* Remove o padding para o botão ficar do tamanho do ícone */
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: 5px;
+    font-size: 24px; /* Ajusta o tamanho do ícone */
+    width: 40px; /* Ajusta a largura do botão para ser menor */
+    height: 40px; /* Ajusta a altura do botão para ser menor */
+    opacity: 0; /* Inicia invisível */
+    transition: opacity 0.3s ease; /* Transição suave para a opacidade */
+}
+
+#prev {
+    left: 5px; /* Diminui a margem da seta à esquerda */
+}
+
+#next {
+    right: 5px; /* Diminui a margem da seta à direita */
+}
+
+.carrossel:hover #prev,
+.carrossel:hover #next {
+    opacity: 1; /* Torna visíveis quando o mouse está sobre a carrossel */
+}
+
+button:hover {
+    background-color: transparent; /* Remove qualquer fundo ao passar o mouse */
 }
 
 .pesquisa {
-
     min-height: 100vh;
 }
 
 @media screen and (max-width: 1600px) {
     .lista {
         overflow: hidden;
-        overflow-x: scroll;
     }
-
-
 }
