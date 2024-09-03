@@ -13,27 +13,25 @@ function carregarTemporadas() {
             const temporadasUnicas = [...new Set(data.map(temporada => temporada.temporada))];
             listaTemporadas.innerHTML = ''; // Limpa as opções existentes
 
-            const optionDefault = document.createElement('option');
-            optionDefault.value = '';
-            optionDefault.textContent = 'Selecione a temporada'
-            listaTemporadas.appendChild(optionDefault); 
-           
-            temporadasUnicas.forEach(temporada => {
+            // Adiciona a primeira temporada como selecionada por padrão
+            temporadasUnicas.forEach((temporada, index) => {
                 const option = document.createElement('option');
                 option.value = temporada;
-                option.textContent = temporada;
+                option.textContent = `Temporada ${temporada}`;
+                
+                // Define a primeira temporada como selecionada
+                if (index === 0) {
+                    option.selected = true;
+                }
+
                 listaTemporadas.appendChild(option);
             });
-
-            const optionTodos = document.createElement('option');
-            optionTodos.value = 'todas';
-            optionTodos.textContent = 'Todas as temporadas'
-            listaTemporadas.appendChild(optionTodos); 
         })
         .catch(error => {
             console.error('Erro ao obter temporadas:', error);
         });
 }
+
 
 // Função para carregar episódios de uma temporada
 function carregarEpisodios() {
@@ -56,7 +54,7 @@ function carregarEpisodios() {
                 
                 const paragrafo = document.createElement('p');
                 const linha = document.createElement('br');
-                paragrafo.textContent = `Temporada ${temporada}`;
+                //paragrafo.textContent = ``;
                 fichaSerie.appendChild(paragrafo);
                 fichaSerie.appendChild(linha);
                 fichaSerie.appendChild(ul);
@@ -87,6 +85,7 @@ function carregarInfoSerie() {
             console.error('Erro ao obter informações da série:', error);
         });
 }
+
 
 // Adiciona ouvinte de evento para o elemento select
 listaTemporadas.addEventListener('change', carregarEpisodios);
