@@ -145,3 +145,59 @@ function geraSeries() {
             lidarComErro("Ocorreu um erro ao carregar os dados.");
         });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const carrosselInicial = document.querySelector('.carrossel-inicial-container');
+    const slides = document.querySelectorAll(".carrossel-inicial-slides img");
+
+    // Criar botões de navegação
+    const btnPrev = document.createElement('button');
+    btnPrev.id = 'prev';
+    btnPrev.ariaLabel = 'Anterior';
+    btnPrev.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>'; 
+    carrosselInicial.appendChild(btnPrev);
+
+    const btnNext = document.createElement('button');
+    btnNext.id = 'next';
+    btnNext.ariaLabel = 'Próximo';
+    btnNext.innerHTML = '<span class="material-symbols-outlined">chevron_right</span>'; 
+    carrosselInicial.appendChild(btnNext);
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        // Remove o blur de todas as imagens antes de atualizar o índice
+        slides.forEach(slide => slide.classList.remove('blur'));
+
+        if (index >= slides.length) {
+            currentIndex = 0;
+        } else if (index < 0) {
+            currentIndex = slides.length - 1;
+        } else {
+            currentIndex = index;
+        }
+
+        // Calcula o índice da imagem anterior e aplica o blur
+        const previousIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+        slides[previousIndex].classList.add('blur');
+
+        const offset = -currentIndex * 100;
+        document.querySelector(".carrossel-inicial-slides").style.transform = `translateX(${offset}%)`;
+    }
+
+    btnNext.addEventListener("click", function () {
+        showSlide(currentIndex + 1);
+    });
+
+    btnPrev.addEventListener("click", function () {
+        showSlide(currentIndex - 1);
+    });
+
+    setInterval(function () {
+        showSlide(currentIndex + 1);
+    }, 7000); // Muda de imagem a cada 7 segundos
+});
+
+
+
+

@@ -1,12 +1,9 @@
 body {
     background-size: cover;
-    background-image: linear-gradient(180.61deg, #142d44 60%, #0c233a 80%);
-    margin: 0; /* Remove a margem padrão */
-    padding: 0; /* Remove o padding */
-    min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da tela */
-    overflow-x: hidden; /* Remove a rolagem horizontal se houver */
-    overflow-y: auto; /* Permite rolagem vertical se o conteúdo exceder a altura da tela */
-    margin-bottom: 10%;
+    background-image: linear-gradient(180.61deg, #142d44f6 60%,  #1c3e60f7 80%);
+    padding: 5em;
+    height: 100%;
+    min-height: 100vh;
 }
 
 
@@ -35,46 +32,22 @@ select {
     width: 10%;
 }
 
+.ficha img {
+    margin: 0 3em 2em 0;
+}
+
 .ficha-descricao {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.5) 100%);
+    display: flex;
 }
 
-.ficha-descricao img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 1;
-}
-
-.ficha-descricao > div {
-    position: relative; /* Garante que o texto seja posicionado sobre a imagem */
-    z-index: 2; /* Garante que o texto fique acima da imagem */
-    padding: 2em; /* Ajusta o espaço interno conforme necessário */
-    color: #fff; /* Define a cor do texto para garantir que seja visível sobre a imagem */
-    text-align: start; /* Centraliza o texto */
-    top: 30%;
-    max-width: 100%; /* Garante que o texto não exceda a largura da tela */
-}
-
-.main-container {
-    padding: 1em; /* Ajusta o padding conforme necessário */
-    overflow-y: auto; /* Permite rolagem vertical */
-}
-
-.temporada-sub {
-    margin-left: 5%;
+.ficha-descricao div {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
 }
 
 .dropdown-select {
     width: 12%;
-    margin-left: 5%;
     padding: 6px 8px 6px 10px;
     height: 50px;
     line-height: 20px;
