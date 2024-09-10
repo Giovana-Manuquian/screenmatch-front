@@ -197,7 +197,3 @@ document.addEventListener("DOMContentLoaded", function () {
         showSlide(currentIndex + 1);
     }, 7000); // Muda de imagem a cada 7 segundos
 });
-
-
-
-
