@@ -41,25 +41,59 @@ main {
     padding: 0 8em;
 }
 
+/* Estilização para o menu de navegação */
+.cabecalho__nav {
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+    text-align: center; /* Centraliza os links dentro do nav */
+    padding-bottom: 3.5%;
+}
+
+.cabecalho__nav a {
+    color: white; /* Define a cor dos links como branca */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    margin: 0 15px; /* Espaçamento horizontal entre os links */
+    position: relative; /* Necessário para posicionar a linha embaixo */
+    font-size: 1.2em; /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.cabecalho__nav a::after {
+    content: ''; /* Adiciona um conteúdo vazio para o pseudo-elemento */
+    display: block; /* Faz o pseudo-elemento se comportar como um bloco */
+    height: 2px; /* Espessura da linha */
+    background-color: white; /* Cor da linha */
+    position: absolute; /* Posiciona a linha de forma absoluta */
+    left: 0; /* Alinha a linha à esquerda do link */
+    bottom: -5px; /* Espaço entre o link e a linha */
+    width: 0; /* Inicialmente a linha não é visível */
+    transition: width 0.3s ease; /* Suaviza a transição da largura da linha */
+}
+
+.cabecalho__nav a:hover::after {
+    width: 100%; /* Expande a linha para a largura total do link ao passar o mouse */
+}
+
+
 .cabecalho {
     display: flex;
     justify-content: space-between;
-    padding: 1em 3em;
+    padding: 1em 8em;
 }
 
 .cabecalho__logo {
     display: flex;
     gap: 1em;
+    margin-top: 10px;
 }
 
 .cabecalho__logo img {
-    width: 150px;
+    width: 130px;
     height: 50px;
 }
 
 .material-symbols-outlined {
     color: white;
     font-size: 48px;
+    margin-top: 10px;
 }
 
 .carrossel-inicial {

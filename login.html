@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+
+    <main>
+        <section>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <button id="google-login">Entrar com Google</button>
+        </section>
+    </main>
+
+    <script type="module">
+        import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+        import { auth } from './firebase-config.js';
+
+        // Função para login com email e senha
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = 'perfil.html';
+            } catch (error) {
+                console.error("Erro ao fazer login:", error.message);
+                alert("Erro ao fazer login. Verifique suas credenciais.");
+            }
+        });
+
+        // Função para login com Google
+        document.getElementById('google-login').addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
+
+            try {
+                await signInWithPopup(auth, provider);
+                window.location.href = 'perfil.html';
+            } catch (error) {
+                console.error("Erro ao fazer login com Google:", error.message);
+                alert("Erro ao fazer login com Google.");
+            }
+        });
+    </script>
+</body>
+</html>

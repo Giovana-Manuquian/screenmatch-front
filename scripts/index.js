@@ -102,33 +102,45 @@ function lidarComErro(mensagemErro) {
     console.error(mensagemErro);
 }
 
-const categoriaSelect = document.querySelector('[data-categorias]');
+const linksCategorias = document.querySelectorAll('.cabecalho__nav a');
 const sectionsParaOcultar = document.querySelectorAll('.section');
+const categoria = document.querySelector('[data-name="categoria"]');
 
-categoriaSelect.addEventListener('change', function () {
-    const categoria = document.querySelector('[data-name="categoria"]');
-    const categoriaSelecionada = categoriaSelect.value;
+linksCategorias.forEach(link => {
+    link.addEventListener('click', function (event) {
+        event.preventDefault(); // Impede o comportamento padrão do link
 
-    if (categoriaSelecionada === 'todos') {
-        for (const section of sectionsParaOcultar) {
-            section.classList.remove('hidden');
-        }
-        categoria.classList.add('hidden');
-    } else {
-        for (const section of sectionsParaOcultar) {
+        const categoriaSelecionada = this.getAttribute('data-categoria');
+
+        // Oculta todas as seções
+        sectionsParaOcultar.forEach(section => {
             section.classList.add('hidden');
-        }
+        });
 
-        categoria.classList.remove('hidden');
-        getDados(`/series/categoria/${categoriaSelecionada}`)
-            .then(data => {
-                criarListaFilmes(categoria, data);
-            })
-            .catch(error => {
-                lidarComErro("Ocorreu um erro ao carregar os dados da categoria.");
+        if (categoriaSelecionada === 'todos') {
+            // Mostra todas as seções se "todos" for selecionado
+            sectionsParaOcultar.forEach(section => {
+                section.classList.remove('hidden');
             });
-    }
+            categoria.classList.add('hidden');
+        } else {
+            // Mostra a seção da categoria selecionada
+            categoria.classList.remove('hidden');
+            getDados(`/series/categoria/${categoriaSelecionada}`)
+                .then(data => {
+                    // Limpa o conteúdo existente antes de adicionar o novo
+                    categoria.innerHTML = '';
+                    criarListaFilmes(categoria, data);
+                })
+                .catch(error => {
+                    lidarComErro("Ocorreu um erro ao carregar os dados da categoria.");
+                });
+        }
+    });
 });
+
+
+
 
 // Array de URLs para as solicitações
 geraSeries();
