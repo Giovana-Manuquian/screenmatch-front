@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
-    <link rel="stylesheet" href="css/login.css">
-    <script type="module" src="scripts/login.js"></script> <!-- Script correto para login -->
+    <title>Cadastro de Conta</title>
+    <link rel="stylesheet" href="css/register.css">
+    <script type="module" src="scripts/register.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+    
+
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="login-form">
+    <div class="register-container">
+        <h2>Criar Conta</h2>
+        <form id="register-form">
             <label for="email">Email:</label>
             <input type="email" id="email" placeholder="Email" required>
             
             <label for="password">Senha:</label>
-            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" placeholder="Senha" required>
             
-            <button id="login" type="submit">Entrar</button> <!-- ID do botão login correto -->
+            <button id="register" type="submit">Criar Conta</button>
             <div class="social">
                 <div class="go" id="google">
                     <img src="https://logopng.com.br/logos/google-37.png" alt="Google" class="google-logo">
                 </div>
-            </div>  
+            </div>
+            
             <div class="form">
-                <p>Não tem uma conta?
-                <span><a href="register.html">Criar Conta</a></span> <!-- Link correto para criar conta -->
+                <p>Já tem uma conta?
+                <span><a href="login.html">Login</a></span> <!-- Link correto para criar conta -->
             </div>
         </form>
     </div>

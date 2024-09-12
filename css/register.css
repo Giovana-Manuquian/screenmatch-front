@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(180.61deg,
+    #0d0915 25.16%,
+    #04254f 80%,
+    #123140 100%);
+}
+
+.register-container {
+    background-color: hsl(0deg 0% 87% / 6%); /* Branco com 90% opacidade */
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 1.5em;
+    color: whitesmoke;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5em;
+    color: whitesmoke;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.8em;
+    margin-bottom: 1.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #0d091598;
+}
+
+button {
+    width: 100%;
+    padding: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #ddd;
+    color: black;
+    font-size: 1em;
+    cursor: pointer;
+    margin-bottom: 1.5em;
+}
+
+button:hover {
+    background-color: whitesmoke;
+}
+
+.create-account-btn {
+    background-color: #28a745;
+    margin-bottom: 2em;
+}
+
+.create-account-btn:hover {
+    background-color: #218838;
+}
+
+.social {
+    margin-top: 1em;
+    text-align: center;
+}
+
+#google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; /* Redondo */
+    overflow: hidden;   /* Garante que o conteúdo siga o formato arredondado */
+    background-color: hsla(0, 0%, 87%, 0); /* Cor de fundo para realçar a logo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Centraliza o botão dentro do contêiner */
+    margin-bottom: 25px;
+}
+
+#google img.google-logo {
+    width: 100%;   /* Ajusta a imagem ao tamanho do botão */
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o botão sem distorção */
+}
+
+.form {
+    color: whitesmoke;
+}
+
+a {
+    color: whitesmoke; /* Define a cor do link */
+    text-decoration: none; /* Remove o sublinhado */
+}
+
+a:visited {
+    color: whitesmoke; /* Garante que a cor não mude após o clique */
+}
+
+a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+a:active {
+    color: whitesmoke; /* Mantém a cor no estado ativo */
+}
+
